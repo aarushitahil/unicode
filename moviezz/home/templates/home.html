@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Moviezz Home</title>
+</head>
+<body>
+    <h1>Moviezz Home</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
