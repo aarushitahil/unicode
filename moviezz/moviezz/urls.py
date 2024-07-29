@@ -20,8 +20,8 @@ from home.views import *
 
 urlpatterns = [
     path('', home, name='home'),
-    path('searchbytitle/<str:title>/', search_by_title, name='searchbytitle'),
+    path('search_results/', search_results, name='search_results'),
     path('movie/<str:title>/', movie_details, name='movie_details'),
-    path('searchbygenre/<str:title>/<str:genre>/', search_by_genre, name='searchbygenre'),
+    path('previously_searched/', previously_searched, name='previously_searched'),
     path('admin/', admin.site.urls),
 ]

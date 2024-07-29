@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>Previously Searched</title>
+</head>
+<body>
+    <h1>Previously Searched Movies</h1>
+    <ul>
+        {% for movie in movies %}
+        <li>
+            <strong>{{ movie.title }}</strong> | Search count: {{ movie.count }}<br>
+            Released: {{ movie.released }} | Runtime:</strong> {{ movie.runtime }} | IMDb Rating:</strong> {{ movie.imdb_rating }}<br> 
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
