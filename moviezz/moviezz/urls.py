@@ -23,5 +23,6 @@ urlpatterns = [
     path('search_results/', search_results, name='search_results'),
     path('movie/<str:title>/', movie_details, name='movie_details'),
     path('previously_searched/', previously_searched, name='previously_searched'),
+    path('movie_comparison/', movie_comparison, name='movie_comparison'),
     path('admin/', admin.site.urls),
 ]

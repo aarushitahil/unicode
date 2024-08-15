@@ -1,15 +1,12 @@
 import requests
 from django.shortcuts import render
 from django.http import HttpResponse
-from django import forms
 from .models import MoviesSearched
+from .forms import *
 
 apikey = 'c2ab0e02'
 url = 'http://www.omdbapi.com/'
 
-class InputGenre(forms.Form):
-    title = forms.CharField(label='Title Prompt:', max_length=100)
-    genre = forms.CharField(label='Genre(Optional):', max_length=30, required=False)
 
 def home(request):
     if request.method == 'POST':        #why are we doing this
@@ -62,3 +59,28 @@ def movie_details(request, title):
 def previously_searched(request):
     movies = MoviesSearched.objects.all()
     return render(request, 'previously_searched.html', {'movies': movies})
+
+def movie_comparison(request):
+    if request.method == 'POST':        #why are we doing this
+        form = MovieComparison(request.POST)
+
+        if form.is_valid():
+            title1 = form.cleaned_data['title1']
+            title2 = form.cleaned_data['title2']
+            response1 = requests.get(f'{url}?t={title1}&apikey={apikey}')
+            response2 = requests.get(f'{url}?t={title2}&apikey={apikey}')
+            if response1 and response2:
+                movie1 = response1.json()
+                movie2 = response2.json()
+                if float(movie1['imdbRating'])>float(movie2['imdbRating']):
+                    winner = movie1['Title']
+                elif float(movie2['imdbRating'])>float(movie1['imdbRating']):
+                    winner = movie2['Title']
+                else:
+                    winner = "It's a tie."
+                return render(request, 'movie_comparison.html', {'form': form, 'movie1': movie1, 'movie2': movie2, 'winner': winner})
+            else:
+                return HttpResponse('<body>No matches found Please make sure entered titles exist.</body>')
+    else:
+        form = MovieComparison()
+    return render(request, 'movie_comparison.html', {'form': form})

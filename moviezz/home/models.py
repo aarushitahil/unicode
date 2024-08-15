@@ -8,4 +8,4 @@ class MoviesSearched(models.Model):
     count = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.title
+        return self.title #why exactly

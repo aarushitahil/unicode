@@ -5,10 +5,11 @@
 <body>
     <h1>Moviezz Home</h1>
     <form method="POST">
-        {% csrf_token %}
+        {% csrf_token %}        <!--what is this-->
         {{ form.as_p }}
         <button type="submit">Search</button>
     </form>
-    <a href="{% url 'previously_searched' %}">View Previously Searched Movies</a>
+    <a href="{% url 'previously_searched' %}">View Previously Searched Movies <br /> </a>
+    <a href="{% url 'movie_comparison' %}">Compare Two Movies By IMDb Rating</a>
 </body>
 </html>

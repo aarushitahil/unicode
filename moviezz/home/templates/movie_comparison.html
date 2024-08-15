@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Movie Comparison</title>
+    </head>
+    <body>
+        <h1>Compare Movies By IMDb Rating</h1>
+        <form method="POST">
+            {% csrf_token %}        <!--what is this-->
+            {{ form.as_p }}
+            <button type="submit">Compare</button>
+        </form>
+        <h2>Comparison Result:</h2>
+        <h3>{{ movie1.Title }}</h3>
+        <p>Rating: {{ movie1.imdbRating }}</p>
+        <p>Plot: {{ movie1.Plot }}</p>
+        <img src="{{ movie1.Poster }}">
+        <h3>{{ movie2.Title }}</h3>
+        <p>Rating: {{ movie2.imdbRating }}</p>
+        <p>Plot: {{ movie2.Plot }}</p>
+        <img src="{{ movie2.Poster }}">
+        <h3>Winner: {{ winner }}</h3>
+    </body>
+</html>
